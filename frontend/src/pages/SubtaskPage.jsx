@@ -15,6 +15,11 @@ import { RiCheckboxBlankCircleLine } from "react-icons/ri";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import axios from "axios";
 
+const BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5001"
+    : "https://taskify-mern-project-backend.onrender.com";
+
 const SubtaskPage = () => {
   const { taskId } = useParams();
   const { data, isLoading, isError, refetch } = useGetTaskByIdQuery(taskId);
@@ -46,7 +51,7 @@ const SubtaskPage = () => {
       );
 
       await axios.put(
-        `http://localhost:5001/api/v1/task/${taskId}/update-subtasks`,
+        `${BASE_URL}/api/v1/task/${taskId}/update-subtasks`,
         { subTasks: updatedSubTasks },
         { withCredentials: true }
       );
@@ -67,7 +72,7 @@ const SubtaskPage = () => {
       ];
 
       await axios.put(
-        `http://localhost:5001/api/v1/task/${taskId}/update-subtasks`,
+        `${BASE_URL}/api/v1/task/${taskId}/update-subtasks`,
         { subTasks: updatedSubTasks },
         { withCredentials: true }
       );

@@ -1,9 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5001/api/v1/user"
+    : "https://taskify-mern-project-backend.onrender.com/api/v1/user";
+
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5001/api/v1/user",
+    baseUrl: BASE_URL,
     credentials: "include",
   }),
   endpoints: (builder) => ({

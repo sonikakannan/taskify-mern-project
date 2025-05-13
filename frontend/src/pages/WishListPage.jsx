@@ -8,6 +8,11 @@ import {
 import { TaskList } from "../components/manageTask/TaskList";
 import EditTaskDialog from "../components/manageTask/EditTaskDialog";
 
+const BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5001"
+    : "https://taskify-mern-project-backend.onrender.com";
+
 const WishListPage = () => {
   const { data, isLoading, isError, refetch } = useGetMyTasksQuery();
   const [toggleWishlist] = useToggleWishlistMutation();

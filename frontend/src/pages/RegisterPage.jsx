@@ -6,6 +6,11 @@ import axios from "axios";
 import user_icon from "../assets/user_icon.png"; // Ensure this path is correct
 import { FaPlus } from "react-icons/fa";
 
+const BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5001"
+    : "https://taskify-mern-project-backend.onrender.com";
+
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -27,7 +32,7 @@ const RegisterPage = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5001/api/v1/user/upload-image",
+        `${BASE_URL}/api/v1/user/upload-image`,
         formData
       );
       return res.data.imageUrl;

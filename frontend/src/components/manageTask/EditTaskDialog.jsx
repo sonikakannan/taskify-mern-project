@@ -12,6 +12,11 @@ import {
 import axios from "axios";
 import { toast } from "react-toastify";
 
+const BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5001"
+    : "https://taskify-mern-project-backend.onrender.com";
+
 const EditTaskDialog = ({ open, onClose, task, onSave }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -44,7 +49,7 @@ const EditTaskDialog = ({ open, onClose, task, onSave }) => {
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:5001/api/v1/task/${task._id}`,
+        `${BASE_URL}/api/v1/task/${task._id}`,
         formData,
         { withCredentials: true }
       );
