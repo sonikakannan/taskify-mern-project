@@ -8,6 +8,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const BASE_URL =
+  process.env.MODE === "development"
+    ? "http://localhost:5173"
+    : "https://taskify-mern-project.onrender.com";
+
 export const register = catchAsyncError(async (req, res, next) => {
   try {
     const { name, email, password, profileImageUrl} = req.body;
@@ -169,7 +174,7 @@ export const forgotPassword = catchAsyncError(async (req, res, next) => {
   const resetToken = user.generateResetPasswordToken();
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${BASE_URL}/password/reset/${resetToken}`;
   const message = `Your Reset Password Token is:- \n\n ${resetPasswordUrl} \n\n If you have not requested this email then please ignore it.`;
 
   try {
