@@ -34,6 +34,10 @@ app.use('/api/v1/task', taskRouter);
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.get('/', (req, res) => {
+  res.send('API is working!');
+});
+
 app.use(errorMiddleware);
 
 const PORT = process.env.PORT || 5001;
